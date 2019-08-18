@@ -1,7 +1,7 @@
 import React from 'react';
-import './Game.css';
+import './Home.css';
 
-class Game extends React.Component {
+class Home extends React.Component {
 
     constructor(props) {
         super(props);
@@ -48,4 +48,4 @@ class Game extends React.Component {
     }
 }
 
-export default Game;
+export default Home;
