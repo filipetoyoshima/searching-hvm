@@ -16,6 +16,12 @@ class Game extends React.Component {
                 </h1>
                 <div className='boxes-container'>
                     <Number_Box number={2} />
+                    <Number_Box number={3} />
+                    <Number_Box number={3} />
+                    <Number_Box number={3} />
+                    <Number_Box number={3} />
+                    <Number_Box number={3} />
+                    <Number_Box number={3} />
                 </div>
             </div>
         )

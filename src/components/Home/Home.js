@@ -24,7 +24,9 @@ class Home extends React.Component {
                     <Game
                         n={this.state.number_of_cells}
                     />
-                    <button onClick={this.gameStop}>
+                    <button
+                        onClick={this.gameStop}  
+                    >
                         Back to Home
                     </button>
                 </>

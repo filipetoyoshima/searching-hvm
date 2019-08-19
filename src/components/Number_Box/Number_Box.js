@@ -1,5 +1,6 @@
 import React from 'react'
 import './Number_Box.css'
+import { throwStatement } from '@babel/types';
 
 class Number_Box extends React.Component {
     constructor(props){
@@ -8,11 +9,14 @@ class Number_Box extends React.Component {
             is_open: false,
         }
         this.getNumber = this.getNumber.bind(this)
+        this.open_box = this.open_box.bind(this)
     }
 
     render() {
         return (
-            <div className='number-box'>
+            <div className='number-box'
+                onClick={this.open_box}
+            >
                 <div className='number'>
                     {this.getNumber()}
                 </div>
@@ -26,6 +30,13 @@ class Number_Box extends React.Component {
         } else {
             return '?'
         }
+    }
+
+    open_box(e) {
+        let status = this.state.is_open;
+        this.setState({
+            is_open: !status
+        })
     }
 }
 
