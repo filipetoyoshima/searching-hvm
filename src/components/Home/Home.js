@@ -7,7 +7,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            number_of_cells: 0,
+            number_of_cells: 10,
             is_running: false,
         }
         this.handleChange = this.handleChange.bind(this);
@@ -22,7 +22,7 @@ class Home extends React.Component {
             return (
                 <>
                     <Game
-                        n={this.state.number_of_cells}
+                        number_of_cells={this.state.number_of_cells}
                     />
                     <button
                         onClick={this.gameStop}  

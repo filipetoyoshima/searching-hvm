@@ -1,8 +1,7 @@
 import React from 'react'
 import './Number_Box.css'
-import { throwStatement } from '@babel/types';
 
-class Number_Box extends React.Component {
+class NumberBox extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -40,4 +39,4 @@ class Number_Box extends React.Component {
     }
 }
 
-export default Number_Box
+export default NumberBox

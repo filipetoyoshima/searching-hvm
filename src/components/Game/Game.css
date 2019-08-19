@@ -4,7 +4,8 @@
 }
 
 .boxes-container {
-    width: 500px;
+    width: 90%;
+    min-width: 20%;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
