@@ -18,7 +18,6 @@ class Home extends React.Component {
     }
 
     render() {
-
         if (this.state.is_running) {
             return (
                 <>
@@ -60,9 +59,6 @@ class Home extends React.Component {
     };
 
     handleChange(e) {
-        console.warn(e.target.value)
-        console.warn(!isNaN(e.target.value))
-
         if (!isNaN(e.target.value)) {
             let number = parseInt(e.target.value, 10)
             this.setState({

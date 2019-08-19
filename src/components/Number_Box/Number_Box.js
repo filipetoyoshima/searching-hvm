@@ -4,9 +4,6 @@ import './Number_Box.css'
 class NumberBox extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            is_open: false,
-        }
         this.getNumber = this.getNumber.bind(this)
         this.open_box = this.open_box.bind(this)
     }
@@ -24,7 +21,7 @@ class NumberBox extends React.Component {
     }
 
     getNumber() {
-        if (this.state.is_open) {
+        if (this.props.is_open) {
             return this.props.number;
         } else {
             return '?'
@@ -32,9 +29,14 @@ class NumberBox extends React.Component {
     }
 
     open_box(e) {
-        let status = this.state.is_open;
         this.setState({
-            is_open: !status
+            is_open: true
+        })
+    }
+
+    close_box(e) {
+        this.setState({
+            is_open: false
         })
     }
 }
