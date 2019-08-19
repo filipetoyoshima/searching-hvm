@@ -9,6 +9,7 @@ class Home extends React.Component {
         this.state = {
             number_of_cells: 10,
             is_running: false,
+            text: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.gameStart    = this.gameStart.bind(this);
@@ -42,6 +43,7 @@ class Home extends React.Component {
                     <input
                         id="number-of-cells"
                         onChange={this.handleChange}
+                        value={this.state.text}
                         style={{
                             marginTop: 10
                         }}
@@ -58,10 +60,14 @@ class Home extends React.Component {
     };
 
     handleChange(e) {
+        console.warn(e.target.value)
+        console.warn(!isNaN(e.target.value))
+
         if (!isNaN(e.target.value)) {
             let number = parseInt(e.target.value, 10)
             this.setState({
                 number_of_cells: number,
+                text: e.target.value,
             });
         }
     };
