@@ -8,7 +8,6 @@ class Game extends React.Component {
         super(props)
         this.state = {
             array: [],
-            boxes_refs: [],
             is_box_open: [],
             last_box: -1,
         }
@@ -18,19 +17,16 @@ class Game extends React.Component {
     componentDidMount() {
         let i, r = Math.floor(Math.random() * 30 + 1);
         let arr = [r];
-        let ref_arr = [React.createRef()];
         let open_arr = [false];
 
         for (i=1; i<this.props.number_of_cells; i++) {
             r = Math.floor(Math.random() * 30 + 1);
             arr.push(arr[i-1] + r);
-            ref_arr.push(React.createRef());
             open_arr.push(false);
         }
 
         this.setState({
             array: arr,
-            boxes_refs: ref_arr,
             is_box_open: open_arr,
         })
     }
@@ -44,13 +40,15 @@ class Game extends React.Component {
                 <div className='boxes-container'>
                     {
                         this.state.array.map((number, index) =>
-                            <div onClick={() => this.handleClick(index)}
-                                 className='inside-container'>
+                            <div
+                                onClick={() => this.handleClick(index)}
+                                className='inside-container'
+                                key={'div' + index}>
                                 <NumberBox
                                     number={number}
                                     is_open={this.state.is_box_open[index]}
+                                    index={index}
                                     key={index}
-                                    ref={this.state.boxes_refs[index]}
                                 />
                             </div>
                         )
@@ -64,7 +62,7 @@ class Game extends React.Component {
         let actual_open_array = this.state.is_box_open;
         actual_open_array[index] = true;
 
-        if (this.state.last_box != -1) {
+        if (this.state.last_box !== -1 && this.state.last_box !== index) {
             actual_open_array[this.state.last_box] = false;
         }
 
