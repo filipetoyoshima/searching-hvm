@@ -10,15 +10,10 @@ td {
     text-align: center;
 }
 
-.center {
-    line-height: 50px;
-    background-color: aqua;
-}
-
 .container {
     margin: auto;
     width: 50vw;
-    height: 100vh;
+    height: 90vh;
     text-align: center;
     padding: 20px;
 }

@@ -33,12 +33,12 @@ class Home extends React.Component {
             return (
                 <div className='container'>
                     <h1>Searching Game</h1>
-                    <label htmlFor="new-todo">
+                    <label htmlFor="how-many-numbers">
                         How many numbers?
                     </label>
                     <br/>
                     <input
-                        id="new-todo"
+                        id="number-of-cells"
                         onChange={this.handleChange}
                         style={{
                             marginTop: 10
