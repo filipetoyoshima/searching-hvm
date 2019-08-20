@@ -6,16 +6,27 @@ class Game extends React.Component {
     
     constructor(props) {
         super(props)
+        // Receive by props the number of numbers that the game will have
         this.state = {
             array: [],
             is_box_open: [],
+            is_bot_turn: false,
             last_box: -1,
         }
         this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
-        let i, r = Math.floor(Math.random() * 30 + 1);
+        // Initiate 2 arrays:
+        //
+        // - Array of numbers, which the game will use
+        //   This array will have 1~30 between each number
+        //
+        // - Array of closed and open.
+        //   This value will be passed to each number box
+
+        let i;
+        let r = Math.floor(Math.random() * 30 + 1);
         let arr = [r];
         let open_arr = [false];
 
@@ -39,6 +50,8 @@ class Game extends React.Component {
                 </h1>
                 <div className='boxes-container'>
                     {
+                        // Render a NumberBox for each element in
+                        // numbers array, from componentDidMount()
                         this.state.array.map((number, index) =>
                             <div
                                 onClick={() => this.handleClick(index)}
@@ -54,11 +67,24 @@ class Game extends React.Component {
                         )
                     }
                 </div>
+                <div className='bot-button'>
+                    Bot Turn!
+                </div>
             </div>
         )
     }
 
     handleClick(index) {
+        // Receive the index of the clicked box
+        // - Open the clicked NumberBox
+        // - Close other boxes, if needed
+        // - Give the turn to the Bot (not implemented yet)
+
+        // validate if it is player's turn
+        if (this.state.is_bot_turn) {
+            return;
+        }
+
         let actual_open_array = this.state.is_box_open;
         actual_open_array[index] = true;
 
@@ -68,10 +94,10 @@ class Game extends React.Component {
 
         this.setState({
             is_box_open: actual_open_array,
-            last_box: index
+            last_box: index,
+            is_bot_turn: true,
         })
-
-    }   
+    }
 }
 
 export default Game;

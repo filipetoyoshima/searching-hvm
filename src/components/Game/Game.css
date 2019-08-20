@@ -15,6 +15,28 @@
     display: inline-block;
 }
 
+.bot-button {
+    margin: auto;
+    width: 100px;
+    height: 40px;
+    background-color: brown;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.bot-button-deactivated {
+    margin: auto;
+    width: 100px;
+    height: 40px;
+    background-color: brown;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
 h1 {
     margin: auto;
 }

@@ -18,6 +18,10 @@ class Home extends React.Component {
     }
 
     render() {
+        // If Game is set up, then renders the
+        // Game component. Also returns a button
+        // to go back to the set up menu
+
         if (this.state.is_running) {
             return (
                 <>
@@ -31,6 +35,10 @@ class Home extends React.Component {
                     </button>
                 </>
             )
+
+        // If the Game is not set up yet (initial state)
+        // then renders a menu where the player can
+        // set up things and click on button to start the game 
         } else {
             return (
                 <div className='container'>
@@ -59,6 +67,9 @@ class Home extends React.Component {
     };
 
     handleChange(e) {
+        // Updates the input value.
+        // Validates if the input still a number
+
         if (!isNaN(e.target.value)) {
             let number = parseInt(e.target.value, 10)
             this.setState({
@@ -69,6 +80,9 @@ class Home extends React.Component {
     };
 
     gameStart(e) {
+        // If the input value is a valid number,
+        // then start the game
+
         if (this.state.number_of_cells < 1) {
             // warn the user here!
             // i'm too lazy to do it right now
@@ -81,6 +95,8 @@ class Home extends React.Component {
     };
 
     gameStop(e) {
+        // Just stop the game
+        
         this.setState({
             is_running: false
         })
