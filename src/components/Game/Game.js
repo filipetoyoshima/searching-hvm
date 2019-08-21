@@ -1,6 +1,9 @@
 import React from 'react'
 import './Game.css'
 import NumberBox from '../Number_Box/Number_Box';
+import {connect} from 'react-redux';
+import * as searchingHvmAction from '../../actions/searchingHvmAction';
+
 
 class Game extends React.Component {
     
@@ -100,4 +103,10 @@ class Game extends React.Component {
     }
 }
 
-export default Game;
+const mapStateToProps = state => {return {...state}};
+
+const mapDispatchToProps = dispatch => ({
+    setArray: (arr) => dispatch(searchingHvmAction.setArray(arr)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import Game from '../Game/Game';
+import AlgorithmButton from '../AlgorithmButton/AlgorithmButton';
 
 class Home extends React.Component {
 
@@ -60,6 +61,9 @@ class Home extends React.Component {
                     >
                         Go!
                     </button>
+                    <div>
+                        <AlgorithmButton text="Busca Binária" />
+                    </div>
                     
                 </div>
             )
