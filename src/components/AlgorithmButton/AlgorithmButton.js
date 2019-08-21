@@ -14,14 +14,12 @@ class AlgorithmButton extends React.Component {
 
     render() {
         return ( 
-                this.state.algorithms.map( (text) => 
-                <div>
-                    <Button variant="contained" color="primary" className="Button">
+            <div>
+                {this.state.algorithms.map( (text, index) => 
+                    <Button key={index + '-text'} variant="contained" color="primary" className="Button">
                         {text}
-                    </Button> 
-                </div>
-                )
-           
+                    </Button>)} 
+            </div>
         );
     }
 }

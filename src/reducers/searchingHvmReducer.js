@@ -4,7 +4,8 @@ export default (state, action) => {
         case "SET_ARRAY":
             return {
                 ...state,
-                numbers: action.numbers
+                numbers: action.numbers,
+                lucky_number: action.lucky_number
             };
         
         default:

@@ -52,7 +52,7 @@ class Game extends React.Component {
         return (
             <div className='game-container'>
                 <h1>
-                    The game will happen here, with {this.props.n} numbers
+                    Find the number {this.props.lucky_number}!
                 </h1>
                 <div className='boxes-container'>
                     {

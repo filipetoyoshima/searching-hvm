@@ -4,7 +4,8 @@ import searchingHvmReducer from '../reducers/searchingHvmReducer';
 
 
 const INITIAL_STATE = {
-    numbers: []
+    numbers: [],
+    lucky_number: '3'
 };
 
 function configureStore(state=INITIAL_STATE){
