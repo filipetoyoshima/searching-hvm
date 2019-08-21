@@ -19,7 +19,7 @@ class Game extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // Initiate 2 arrays:
         //
         // - Array of numbers, which the game will use
@@ -38,6 +38,9 @@ class Game extends React.Component {
             arr.push(arr[i-1] + r);
             open_arr.push(false);
         }
+
+        await this.props.setArray(arr);
+
 
         this.setState({
             array: arr,

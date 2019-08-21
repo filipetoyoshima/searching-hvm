@@ -1,4 +1,4 @@
-import {creatStore , applyMiddleware} from 'redux';
+import {createStore , applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import searchingHvmReducer from '../reducers/searchingHvmReducer';
 
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 };
 
 function configureStore(state=INITIAL_STATE){
-    return creatStore(searchingHvmReducer, state, applyMiddleware(thunk));
+    return createStore(searchingHvmReducer, state, applyMiddleware(thunk));
 }
 
 export default configureStore;
