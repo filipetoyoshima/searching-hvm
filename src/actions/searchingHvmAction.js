@@ -50,3 +50,8 @@ export const changeTurn = (turn) => {
         turn_player: !turn
     }
 }
+
+
+export const stopGame = () => {
+    return { type: "STOP_GAME"}
+}

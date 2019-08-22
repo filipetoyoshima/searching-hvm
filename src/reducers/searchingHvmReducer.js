@@ -27,8 +27,15 @@ export default (state, action) => {
                 ...state,
                 turn_player: action.turn_player
             }
+
+        case "STOP_GAME":
+            return {
+                cards: [],
+                lucky_number: '',
+                current_card_index: '',
+                turn_player: true
+            }
             
-        
         default:
             return state;
     }

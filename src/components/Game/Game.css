@@ -39,4 +39,14 @@
 
 h1 {
     margin: auto;
+    align-self: center;
+}
+
+.bot_turn {
+   display: flex;
+   flex-direction: row;
+}
+
+.bot_turn h1 {
+    margin-right: 28vw;
 }

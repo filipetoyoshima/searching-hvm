@@ -2,6 +2,8 @@ import React from 'react';
 import './Home.css';
 import Game from '../Game/Game';
 import AlgorithmButton from '../AlgorithmButton/AlgorithmButton';
+import { connect } from 'react-redux';
+import * as searchingHvmAction from '../../actions/searchingHvmAction';
 
 class Home extends React.Component {
 
@@ -25,7 +27,7 @@ class Home extends React.Component {
 
         if (this.state.is_running) {
             return (
-                <>
+                <main>
                     <Game
                         number_of_cells={this.state.number_of_cells}
                     />
@@ -34,7 +36,7 @@ class Home extends React.Component {
                     >
                         Back to Home
                     </button>
-                </>
+                </main>
             )
 
         // If the Game is not set up yet (initial state)
@@ -100,11 +102,18 @@ class Home extends React.Component {
 
     gameStop(e) {
         // Just stop the game
-        
+        this.props.stopGame();
         this.setState({
             is_running: false
         })
     };
 }
 
-export default Home;
+
+const mapStateToProps = state => { return { ...state } };
+
+const mapDispatchToProps = dispatch => ({
+    stopGame: () => dispatch(searchingHvmAction.stopGame()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

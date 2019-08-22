@@ -4,7 +4,6 @@ import NumberBox from '../Number_Box/Number_Box';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import Button from '@material-ui/core/Button';
-import SelectInput from '@material-ui/core/Select/SelectInput';
 
 
 class Game extends React.Component {
@@ -54,9 +53,14 @@ class Game extends React.Component {
     render() {
         return (
             <div className='game-container'>
+                <div className="bot_turn">
                 <h1>
                     Find the number {this.props.lucky_number}!
                 </h1>
+                <Button  variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
+                        Bot Turn!
+                </Button>
+                </div>
                 <div className='boxes-container'>
                     {
                         // Render a NumberBox for each element in
@@ -76,9 +80,6 @@ class Game extends React.Component {
                         )
                     }
                 </div>
-                <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
-                    Bot Turn!
-                </Button>
             </div>
         )
     }
@@ -117,7 +118,7 @@ class Game extends React.Component {
     }
 
     botTurn = async () => {
-        let {closeCard, changeTurn} = this.props;
+        let { closeCard, changeTurn } = this.props;
         await this.props.changeTurn(this.props.turn_player);
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
         await this.props.openCard(0, this.props.cards);
@@ -125,7 +126,7 @@ class Game extends React.Component {
         setTimeout(() => {
             closeCard(this.props.current_card_index, this.props.cards);
             changeTurn(this.props.turn_player);
-        },2000)
+        }, 2000)
 
 
     }
