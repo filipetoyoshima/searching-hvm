@@ -61,8 +61,8 @@ class Home extends React.Component {
                     >
                         Go!
                     </button>
-                    <div>
-                        <AlgorithmButton text="Busca Binária" />
+                    <div className="options">
+                        <AlgorithmButton />
                     </div>
                     
                 </div>

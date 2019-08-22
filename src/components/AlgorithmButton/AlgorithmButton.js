@@ -15,7 +15,7 @@ class AlgorithmButton extends React.Component {
     render() {
         return ( 
             <div>
-                {this.state.algorithms.map( (text, index) => 
+                {this.state.algorithms.map((text, index) => 
                     <Button key={index + '-text'} variant="contained" color="primary" className="Button">
                         {text}
                     </Button>)} 

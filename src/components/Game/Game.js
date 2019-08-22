@@ -58,14 +58,14 @@ class Game extends React.Component {
                     {
                         // Render a NumberBox for each element in
                         // numbers array, from componentDidMount()
-                        this.state.array.map((number, index) =>
+                        this.props.cards.map((card, index) =>
                             <div
                                 onClick={() => this.handleClick(index)}
                                 className='inside-container'
                                 key={'div' + index}>
                                 <NumberBox
-                                    number={number}
-                                    is_open={this.state.is_box_open[index]}
+                                    number={card.number}
+                                    is_open={card.open}
                                     index={index}
                                     key={index}
                                 />
