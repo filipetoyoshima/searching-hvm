@@ -5,8 +5,8 @@ import searchingHvmReducer from '../reducers/searchingHvmReducer';
 
 const INITIAL_STATE = {
     cards: [],
-    lucky_number: '3',
-    actual_open: {}
+    lucky_number: '',
+    current_card_index: ''
 };
 
 function configureStore(state=INITIAL_STATE){

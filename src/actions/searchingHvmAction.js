@@ -17,6 +17,22 @@ export const setArray = (array) => {
     }
 }
 
-export const open_card = (index, cards) => {
+export const openCard = (index, cards) => {
+    let new_cards = cards;
+    new_cards[index].open = true;
+    return {
+        type: "OPEN_CARD",
+        cards: new_cards,
+        current_card_index: index 
+    }
+}
 
+export const closeCard = (index, cards) => {
+    let new_cards = cards;
+    new_cards[index].open = false;
+    return {
+        type: "CLOSE_CARD",
+        cards: new_cards,
+        current_card_index: '' 
+    }
 }

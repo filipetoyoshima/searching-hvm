@@ -20,7 +20,7 @@ class NumberBox extends React.Component {
                     {this.getNumber()}
                 </div>
                 <div className='corner-number'>
-                    {this.props.index}
+                    {this.props.index + 1}
                 </div>
             </div>
         )

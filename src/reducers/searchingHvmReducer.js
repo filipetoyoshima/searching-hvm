@@ -7,6 +7,21 @@ export default (state, action) => {
                 cards: action.cards,
                 lucky_number: action.lucky_number
             };
+
+        case "OPEN_CARD":
+            return {
+                ...state,
+                cards: action.cards,
+                current_card_index: action.current_card_index
+            }
+
+        case "CLOSE_CARD":
+                return {
+                    ...state,
+                    cards: action.cards,
+                    current_card_index: action.current_card_index
+                }
+            
         
         default:
             return state;
