@@ -13,12 +13,19 @@ class Home extends React.Component {
             number_of_cells: 10,
             is_running: false,
             text: '',
-            algorithms: ["Busca Binaria","Busca Sequencial"]
+            algorithms: ["Busca Sequencial Com Sentinela"],
+            algorithmWithSentinel: false,
         }
         this.handleChange = this.handleChange.bind(this);
         this.gameStart    = this.gameStart.bind(this);
         this.gameStop     = this.gameStop.bind(this);
 
+    }
+
+    modeSearchWithSentinel = () => {
+        this.setState({
+            algorithmWithSentinel: true  
+        },this.gameStart)
     }
 
     render() {
@@ -65,7 +72,7 @@ class Home extends React.Component {
                         Go!
                     </button>
                     <div className="options">
-                        <AlgorithmButton algorithms={this.state.algorithms} />
+                        <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {this.modeSearchWithSentinel()}} />
                     </div>
                     
                 </div>
@@ -89,6 +96,10 @@ class Home extends React.Component {
     gameStart(e) {
         // If the input value is a valid number,
         // then start the game
+
+        if(this.state.algorithmWithSentinel){
+            console.log('aaaaaaaa');
+        }
 
         if (this.state.number_of_cells < 1) {
             // warn the user here!

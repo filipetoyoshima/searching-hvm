@@ -45,7 +45,6 @@ export default (state, action) => {
             }else {
                 return {
                     ...state,
-                    opened_cards : [...state.opened_cards]
                 }
             }
 
