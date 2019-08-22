@@ -100,9 +100,9 @@ class Home extends React.Component {
         }
     };
 
-    gameStop(e) {
+    async gameStop(e) {
         // Just stop the game
-        this.props.stopGame();
+        await this.props.stopGame();
         this.setState({
             is_running: false
         })

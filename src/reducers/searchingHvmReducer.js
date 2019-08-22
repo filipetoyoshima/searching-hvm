@@ -36,6 +36,20 @@ export default (state, action) => {
                 turn_player: true
             }
             
+        case "OPENED_CARD":
+            if(!state.opened_cards.includes(action.opened_card)){
+                return {
+                    ...state,
+                    opened_cards : [...state.opened_cards, action.opened_card]
+                }
+            }else {
+                return {
+                    ...state,
+                    opened_cards : [...state.opened_cards]
+                }
+            }
+
+
         default:
             return state;
     }

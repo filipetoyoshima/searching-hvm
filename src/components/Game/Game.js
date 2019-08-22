@@ -54,10 +54,10 @@ class Game extends React.Component {
         return (
             <div className='game-container'>
                 <div className="bot_turn">
-                <h1>
-                    Find the number {this.props.lucky_number}!
+                    <h1>
+                        Find the number {this.props.lucky_number}!
                 </h1>
-                <Button  variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
+                    <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
                         Bot Turn!
                 </Button>
                 </div>
@@ -108,9 +108,15 @@ class Game extends React.Component {
                     is_bot_turn: true,
                 }) */
 
+
+
         if (!this.props.cards[this.props.current_card_index]) {
             await this.props.openCard(index, this.props.cards);
+            await this.props.openedCard(index);
         }
+
+
+        console.log(this.props.opened_cards);
 
         this.setState({
             reload: !this.state.reload
@@ -138,7 +144,8 @@ const mapDispatchToProps = dispatch => ({
     setArray: (arr) => dispatch(searchingHvmAction.setArray(arr)),
     openCard: (index, arr) => dispatch(searchingHvmAction.openCard(index, arr)),
     closeCard: (index, arr) => dispatch(searchingHvmAction.closeCard(index, arr)),
-    changeTurn: (turn) => dispatch(searchingHvmAction.changeTurn(turn))
+    changeTurn: (turn) => dispatch(searchingHvmAction.changeTurn(turn)),
+    openedCard: (index) => dispatch(searchingHvmAction.openedCard(index))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

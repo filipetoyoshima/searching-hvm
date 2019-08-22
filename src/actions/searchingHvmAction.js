@@ -20,6 +20,7 @@ export const setArray = (array) => {
 export const openCard = (index, cards) => {
     let new_cards = cards;
     new_cards[index].open = true;
+    
     return {
         type: "OPEN_CARD",
         cards: new_cards,
@@ -54,4 +55,11 @@ export const changeTurn = (turn) => {
 
 export const stopGame = () => {
     return { type: "STOP_GAME"}
+}
+
+export const openedCard = (index) => {
+    return {
+        type: "OPENED_CARD",
+        opened_card: index,
+    } 
 }
