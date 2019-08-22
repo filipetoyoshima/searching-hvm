@@ -1,5 +1,5 @@
 const searchWithSentinel = (array, number) => {
-    let new_array = array;
+    let new_array = [...array];
     new_array.push({ number: number, open: false });
     let n = new_array.length;
     let i = 0;

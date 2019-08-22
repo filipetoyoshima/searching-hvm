@@ -17,15 +17,9 @@ class Home extends React.Component {
             algorithmWithSentinel: false,
         }
         this.handleChange = this.handleChange.bind(this);
-        this.gameStart    = this.gameStart.bind(this);
-        this.gameStop     = this.gameStop.bind(this);
+        this.gameStart = this.gameStart.bind(this);
+        this.gameStop = this.gameStop.bind(this);
 
-    }
-
-    modeSearchWithSentinel = () => {
-        this.setState({
-            algorithmWithSentinel: true  
-        },this.gameStart)
     }
 
     render() {
@@ -38,18 +32,19 @@ class Home extends React.Component {
                 <main>
                     <Game
                         number_of_cells={this.state.number_of_cells}
+                        algorithm={this.state.algorithm}
                     />
                     <button
-                        onClick={this.gameStop}  
+                        onClick={this.gameStop}
                     >
                         Back to Home
                     </button>
                 </main>
             )
 
-        // If the Game is not set up yet (initial state)
-        // then renders a menu where the player can
-        // set up things and click on button to start the game 
+            // If the Game is not set up yet (initial state)
+            // then renders a menu where the player can
+            // set up things and click on button to start the game 
         } else {
             return (
                 <div className='container'>
@@ -57,7 +52,7 @@ class Home extends React.Component {
                     <label htmlFor="how-many-numbers">
                         How many numbers?
                     </label>
-                    <br/>
+                    <br />
                     <input
                         id="number-of-cells"
                         onChange={this.handleChange}
@@ -72,9 +67,13 @@ class Home extends React.Component {
                         Go!
                     </button>
                     <div className="options">
-                        <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {this.modeSearchWithSentinel()}} />
+                        <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {
+                            this.setState({
+                                algorithmWithSentinel: true
+                            }, this.gameStart)
+                        }} />
                     </div>
-                    
+
                 </div>
             )
         }
@@ -97,8 +96,10 @@ class Home extends React.Component {
         // If the input value is a valid number,
         // then start the game
 
-        if(this.state.algorithmWithSentinel){
-            console.log('aaaaaaaa');
+        if (this.state.algorithmWithSentinel) {
+            this.setState({
+                algorithm: 'WITH_SENTINEL'
+            })  
         }
 
         if (this.state.number_of_cells < 1) {

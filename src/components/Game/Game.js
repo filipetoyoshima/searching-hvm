@@ -17,7 +17,9 @@ class Game extends React.Component {
             is_box_open: [],
             is_bot_turn: false,
             last_box: -1,
-            reload: true
+            reload: true,
+            i: 0,
+            n: 0
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -44,8 +46,10 @@ class Game extends React.Component {
 
         await this.props.setArray(arr);
 
+         i = await searchWithSentinel(this.props.cards, this.props.lucky_number);
 
         this.setState({
+            i,
             array: arr,
             is_box_open: open_arr,
         })
@@ -125,17 +129,43 @@ class Game extends React.Component {
     }
 
     botTurn = async () => {
-        let { closeCard, changeTurn } = this.props;
+        let { closeCard, changeTurn, openCard} = this.props;
         await this.props.changeTurn(this.props.turn_player);
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
-        await this.props.openCard(0, this.props.cards);
-        let i = await searchWithSentinel(this.props.cards, this.props.lucky_number);
+        switch (this.props.algorithm) {
+            case 'WITH_SENTINEL':
+                this.search_with_sentinel();
+                return;
+                
+                default:
+                    openCard(0, this.props.cards);
+                    setTimeout(() => {    
+                    closeCard(this.props.current_card_index, this.props.cards);
+                    changeTurn(this.props.turn_player);
+                }, 2000)
+
+        }
+    }
+
+    search_with_sentinel = () => {
+        let { closeCard, changeTurn, openCard} = this.props;
+
+        if(this.state.n <= this.state.i){
+            openCard(this.state.n, this.props.cards);
+            console.log(this.state.n)
+        }
+
         setTimeout(() => {
+
             closeCard(this.props.current_card_index, this.props.cards);
+        
             changeTurn(this.props.turn_player);
+        
         }, 2000)
 
-
+        this.setState({
+            n: this.state.n + 1
+        });
     }
 
 }
