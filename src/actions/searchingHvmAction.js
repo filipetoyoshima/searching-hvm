@@ -29,10 +29,24 @@ export const openCard = (index, cards) => {
 
 export const closeCard = (index, cards) => {
     let new_cards = cards;
-    new_cards[index].open = false;
+
+    if(index){
+        new_cards[index].open = false;
+    }else {
+        new_cards[0].open = false;
+    }
+
     return {
         type: "CLOSE_CARD",
         cards: new_cards,
         current_card_index: '' 
+    }
+}
+
+export const changeTurn = (turn) => {
+
+    return {
+        type: "CHANGE_TURN",
+        turn_player: !turn
     }
 }

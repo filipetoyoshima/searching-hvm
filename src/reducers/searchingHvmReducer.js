@@ -21,6 +21,12 @@ export default (state, action) => {
                     cards: action.cards,
                     current_card_index: action.current_card_index
                 }
+
+        case "CHANGE_TURN":
+            return {
+                ...state,
+                turn_player: action.turn_player
+            }
             
         
         default:

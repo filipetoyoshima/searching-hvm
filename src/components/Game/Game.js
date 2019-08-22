@@ -76,8 +76,8 @@ class Game extends React.Component {
                         )
                     }
                 </div>
-                <Button variant="contained" color="secondary" onClick={() => this.botTurn()}>
-                    Secondary
+                <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
+                    Bot Turn!
                 </Button>
             </div>
         )
@@ -117,13 +117,16 @@ class Game extends React.Component {
     }
 
     botTurn = async () => {
-        let {closeCard} = this.props;
-        await this.props.closeCard(this.props.current_card_index, this.props.cards)
+        let {closeCard, changeTurn} = this.props;
+        await this.props.changeTurn(this.props.turn_player);
+        await this.props.closeCard(this.props.current_card_index, this.props.cards);
         await this.props.openCard(0, this.props.cards);
 
         setTimeout(() => {
             closeCard(this.props.current_card_index, this.props.cards);
+            changeTurn(this.props.turn_player);
         },2000)
+
 
     }
 
@@ -134,7 +137,7 @@ const mapDispatchToProps = dispatch => ({
     setArray: (arr) => dispatch(searchingHvmAction.setArray(arr)),
     openCard: (index, arr) => dispatch(searchingHvmAction.openCard(index, arr)),
     closeCard: (index, arr) => dispatch(searchingHvmAction.closeCard(index, arr)),
-
+    changeTurn: (turn) => dispatch(searchingHvmAction.changeTurn(turn))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
