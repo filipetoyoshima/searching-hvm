@@ -12,7 +12,8 @@ class Home extends React.Component {
         this.state = {
             number_of_cells: 10,
             is_running: false,
-            text: ''
+            text: '',
+            algorithms: ["Busca Binaria","Busca Sequencial"]
         }
         this.handleChange = this.handleChange.bind(this);
         this.gameStart    = this.gameStart.bind(this);
@@ -64,7 +65,7 @@ class Home extends React.Component {
                         Go!
                     </button>
                     <div className="options">
-                        <AlgorithmButton />
+                        <AlgorithmButton algorithms={this.state.algorithms} />
                     </div>
                     
                 </div>

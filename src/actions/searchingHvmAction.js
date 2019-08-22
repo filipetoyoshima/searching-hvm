@@ -33,7 +33,7 @@ export const closeCard = (index, cards) => {
 
     if(index){
         new_cards[index].open = false;
-    }else {
+    }else if(new_cards[0].open){
         new_cards[0].open = false;
     }
 

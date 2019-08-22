@@ -4,6 +4,7 @@ import NumberBox from '../Number_Box/Number_Box';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import Button from '@material-ui/core/Button';
+import searchWithSentinel from '../../SearchAlgorithms/searchWithSentinel';
 
 
 class Game extends React.Component {
@@ -128,7 +129,7 @@ class Game extends React.Component {
         await this.props.changeTurn(this.props.turn_player);
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
         await this.props.openCard(0, this.props.cards);
-
+        let i = await searchWithSentinel(this.props.cards, this.props.lucky_number);
         setTimeout(() => {
             closeCard(this.props.current_card_index, this.props.cards);
             changeTurn(this.props.turn_player);
