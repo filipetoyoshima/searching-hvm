@@ -98,54 +98,38 @@ class Game extends React.Component {
     }
 
     handleClick = async (index) => {
-        // Receive the index of the clicked box
-        // - Open the clicked NumberBox
-        // - Close other boxes, if needed
-        // - Give the turn to the Bot (not implemented yet)
-
-        // validate if it is player's turn
-        /*         if (this.state.is_bot_turn) {
-                    return;
-                }
-        
-                let actual_open_array = this.state.is_box_open;
-                actual_open_array[index] = true;
-        
-                if (this.state.last_box !== -1 && this.state.last_box !== index) {
-                    actual_open_array[this.state.last_box] = false;
-                }
-        
-                this.setState({
-                    is_box_open: actual_open_array,
-                    last_box: index,
-                    is_bot_turn: true,
-                }) */
-
-
-
+        // Player's turn!
+        // Block a second click before bot's play
         if (!this.props.cards[this.props.current_card_index]) {
 
             await this.props.openCard(index, this.props.cards, this.props.lucky_number);
 
             await this.props.openedCard(index);
         }
+
         this.setState({
             reload: !this.state.reload
         })
     }
 
     botTurn = async () => {
+        // Bot's Turn
 
         let { closeCard, changeTurn, openCard } = this.props;
+        // Give the turn
         await this.props.changeTurn(this.props.turn_player);
 
+        // Close all cards
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
+
+        // Change algorithm
         switch (this.props.algorithm) {
             case 'WITH_SENTINEL':
                 this.search_with_sentinel();
                 return;
 
             default:
+                // In default case, bot just open the first card
                 openCard(0, this.props.cards, this.props.lucky_number);
                 if (!this.props.win_game) {
                     setTimeout(() => {
@@ -157,12 +141,17 @@ class Game extends React.Component {
         }
     }
 
+
+    //Search with sentinel, where 'i' is the lucky number
     search_with_sentinel = () => {
         let { closeCard, changeTurn, openCard } = this.props;
+
+        // Search whilhe number is smaller or equal lucky number's index
         if (this.state.n <= this.state.i) {
             let num = this.state.n;
+            // Jump numbers opened before 
             while (this.props.opened_cards.includes(num)) {
-                num ++;
+                num++;
             }
 
             this.setState({

@@ -99,7 +99,7 @@ class Home extends React.Component {
         if (this.state.algorithmWithSentinel) {
             this.setState({
                 algorithm: 'WITH_SENTINEL'
-            })  
+            })
         }
 
         if (this.state.number_of_cells < 1) {
@@ -115,7 +115,7 @@ class Home extends React.Component {
 
     async gameStop(e) {
         // Just stop the game
-        
+
         window.location.reload();
         await this.props.stopGame();
         this.setState({

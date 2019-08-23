@@ -1,3 +1,5 @@
+// algorithm to seach a number in sequence
+
 const searchWithSentinel = (array, number) => {
     let new_array = [...array];
     new_array.push({ number: number, open: false });

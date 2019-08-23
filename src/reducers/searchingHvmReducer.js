@@ -1,5 +1,5 @@
 export default (state, action) => {
-    switch(action.type){
+    switch (action.type) {
 
         case "SET_ARRAY":
             return {
@@ -16,11 +16,11 @@ export default (state, action) => {
             }
 
         case "CLOSE_CARD":
-                return {
-                    ...state,
-                    cards: action.cards,
-                    current_card_index: action.current_card_index
-                }
+            return {
+                ...state,
+                cards: action.cards,
+                current_card_index: action.current_card_index
+            }
 
         case "CHANGE_TURN":
             return {
@@ -35,14 +35,15 @@ export default (state, action) => {
                 current_card_index: '',
                 turn_player: true
             }
-            
+
         case "OPENED_CARD":
-            if(!state.opened_cards.includes(action.opened_card)){
+            // don't repeat number in array of opened cards
+            if (!state.opened_cards.includes(action.opened_card)) {
                 return {
                     ...state,
-                    opened_cards : [...state.opened_cards, action.opened_card]
+                    opened_cards: [...state.opened_cards, action.opened_card]
                 }
-            }else {
+            } else {
                 return {
                     ...state,
                     opened_cards: state.opened_cards
