@@ -128,9 +128,6 @@ class Game extends React.Component {
             await this.props.openedCard(index);
         }
 
-
-        console.log(this.props.opened_cards, "aa");
-
         this.setState({
             reload: !this.state.reload
         })
@@ -147,11 +144,13 @@ class Game extends React.Component {
 
             default:
                 openCard(0, this.props.cards, this.props.lucky_number);
-                setTimeout(() => {
-                    closeCard(this.props.current_card_index, this.props.cards);
-                    changeTurn(this.props.turn_player);
-                }, 2000)
-
+                if(!this.props.win_game){
+                    setTimeout(() => {
+                        closeCard(this.props.current_card_index, this.props.cards);
+                        changeTurn(this.props.turn_player);
+                    }, 2000)
+                }
+                    
         }
     }
 
