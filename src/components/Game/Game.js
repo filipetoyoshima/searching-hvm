@@ -162,17 +162,19 @@ class Game extends React.Component {
             openCard(this.state.n, this.props.cards, this.props.lucky_number);
         }
 
-        setTimeout(() => {
-
-            closeCard(this.props.current_card_index, this.props.cards);
-
-            changeTurn(this.props.turn_player);
-
-        }, 2000)
-
-        this.setState({
-            n: this.state.n + 1
-        });
+        if(!this.props.win_game){
+            setTimeout(() => {
+                
+                closeCard(this.props.current_card_index, this.props.cards);
+                
+                changeTurn(this.props.turn_player);
+                
+            }, 2000)
+            
+            this.setState({
+                n: this.state.n + 1
+            });
+        }
     }
 
 }
