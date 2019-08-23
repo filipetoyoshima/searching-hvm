@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     lucky_number: '',
     current_card_index: '',
     turn_player: true,
-    opened_cards: []
+    opened_cards: [],
+    win_game: false,
 };
 
 function configureStore(state=INITIAL_STATE){

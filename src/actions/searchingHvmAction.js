@@ -17,15 +17,26 @@ export const setArray = (array) => {
     }
 }
 
-export const openCard = (index, cards) => {
+export const openCard = (index, cards, lucky_number) => {
     let new_cards = cards;
     new_cards[index].open = true;
     
-    return {
-        type: "OPEN_CARD",
-        cards: new_cards,
-        current_card_index: index 
-    }
+    if(lucky_number === new_cards[index].number){
+        console.log("fim");
+        return {
+            type: "WIN_GAME",
+            win_game: true
+        }
+
+    }else{
+
+        return {
+            type: "OPEN_CARD",
+            cards: new_cards,
+            current_card_index: index 
+        }
+        
+    } 
 }
 
 export const closeCard = (index, cards) => {

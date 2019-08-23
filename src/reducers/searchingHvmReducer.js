@@ -48,6 +48,12 @@ export default (state, action) => {
                 }
             }
 
+        case "WIN_GAME":
+            return {
+                ...state,
+                win_game: action.win_game
+            }
+
 
         default:
             return state;

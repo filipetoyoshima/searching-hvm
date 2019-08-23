@@ -46,7 +46,7 @@ class Game extends React.Component {
 
         await this.props.setArray(arr);
 
-         i = await searchWithSentinel(this.props.cards, this.props.lucky_number);
+        i = await searchWithSentinel(this.props.cards, this.props.lucky_number);
 
         this.setState({
             i,
@@ -58,33 +58,41 @@ class Game extends React.Component {
     render() {
         return (
             <div className='game-container'>
-                <div className="bot_turn">
+                {this.props.win_game ? (
                     <h1>
-                        Find the number {this.props.lucky_number}!
-                </h1>
-                    <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
-                        Bot Turn!
-                </Button>
-                </div>
-                <div className='boxes-container'>
-                    {
-                        // Render a NumberBox for each element in
-                        // numbers array, from componentDidMount()
-                        this.props.cards.map((card, index) =>
-                            <div
-                                onClick={() => this.handleClick(index)}
-                                className='inside-container'
-                                key={'div' + index}>
-                                <NumberBox
-                                    number={card.number}
-                                    is_open={card.open}
-                                    index={index}
-                                    key={index}
-                                />
+                        {this.props.turn_player ? "Você Ganhou" : "Você Perdeu"}
+                    </h1>
+                ) : (
+                        <>
+                            <div className="bot_turn">
+                                <h1>
+                                    Find the number {this.props.lucky_number}!
+                    </h1>
+                                <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
+                                    Bot Turn!
+                    </Button>
                             </div>
-                        )
-                    }
-                </div>
+                            <div className='boxes-container'>
+                                {
+                                    // Render a NumberBox for each element in
+                                    // numbers array, from componentDidMount()
+                                    this.props.cards.map((card, index) =>
+                                        <div
+                                            onClick={() => this.handleClick(index)}
+                                            className='inside-container'
+                                            key={'div' + index}>
+                                            <NumberBox
+                                                number={card.number}
+                                                is_open={card.open}
+                                                index={index}
+                                                key={index}
+                                            />
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </>
+                    )}
             </div>
         )
     }
@@ -116,12 +124,12 @@ class Game extends React.Component {
 
 
         if (!this.props.cards[this.props.current_card_index]) {
-            await this.props.openCard(index, this.props.cards);
+            await this.props.openCard(index, this.props.cards, this.props.lucky_number);
             await this.props.openedCard(index);
         }
 
 
-        console.log(this.props.opened_cards);
+        console.log(this.props.opened_cards, "aa");
 
         this.setState({
             reload: !this.state.reload
@@ -129,17 +137,17 @@ class Game extends React.Component {
     }
 
     botTurn = async () => {
-        let { closeCard, changeTurn, openCard} = this.props;
+        let { closeCard, changeTurn, openCard } = this.props;
         await this.props.changeTurn(this.props.turn_player);
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
         switch (this.props.algorithm) {
             case 'WITH_SENTINEL':
                 this.search_with_sentinel();
                 return;
-                
-                default:
-                    openCard(0, this.props.cards);
-                    setTimeout(() => {    
+
+            default:
+                openCard(0, this.props.cards, this.props.lucky_number);
+                setTimeout(() => {
                     closeCard(this.props.current_card_index, this.props.cards);
                     changeTurn(this.props.turn_player);
                 }, 2000)
@@ -148,19 +156,18 @@ class Game extends React.Component {
     }
 
     search_with_sentinel = () => {
-        let { closeCard, changeTurn, openCard} = this.props;
+        let { closeCard, changeTurn, openCard } = this.props;
 
-        if(this.state.n <= this.state.i){
-            openCard(this.state.n, this.props.cards);
-            console.log(this.state.n)
+        if (this.state.n <= this.state.i) {
+            openCard(this.state.n, this.props.cards, this.props.lucky_number);
         }
 
         setTimeout(() => {
 
             closeCard(this.props.current_card_index, this.props.cards);
-        
+
             changeTurn(this.props.turn_player);
-        
+
         }, 2000)
 
         this.setState({
@@ -173,7 +180,7 @@ const mapStateToProps = state => { return { ...state } };
 
 const mapDispatchToProps = dispatch => ({
     setArray: (arr) => dispatch(searchingHvmAction.setArray(arr)),
-    openCard: (index, arr) => dispatch(searchingHvmAction.openCard(index, arr)),
+    openCard: (index, arr, lucky) => dispatch(searchingHvmAction.openCard(index, arr, lucky)),
     closeCard: (index, arr) => dispatch(searchingHvmAction.closeCard(index, arr)),
     changeTurn: (turn) => dispatch(searchingHvmAction.changeTurn(turn)),
     openedCard: (index) => dispatch(searchingHvmAction.openedCard(index))
