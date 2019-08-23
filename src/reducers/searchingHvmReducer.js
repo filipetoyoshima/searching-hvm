@@ -23,7 +23,6 @@ export default (state, action) => {
                 }
 
         case "CHANGE_TURN":
-            console.log('entrou')
             return {
                 ...state,
                 turn_player: action.turn_player
