@@ -124,9 +124,9 @@ class Game extends React.Component {
 
 
         if (!this.props.cards[this.props.current_card_index]) {
-        
+
             await this.props.openCard(index, this.props.cards, this.props.lucky_number);
-        
+
             await this.props.openedCard(index);
         }
         this.setState({
@@ -135,10 +135,10 @@ class Game extends React.Component {
     }
 
     botTurn = async () => {
-    
+
         let { closeCard, changeTurn, openCard } = this.props;
         await this.props.changeTurn(this.props.turn_player);
-    
+
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
         switch (this.props.algorithm) {
             case 'WITH_SENTINEL':
@@ -160,11 +160,14 @@ class Game extends React.Component {
     search_with_sentinel = () => {
         let { closeCard, changeTurn, openCard } = this.props;
         if (this.state.n <= this.state.i) {
-            /*             if(this.props.opened_cards.includes(this.state.n)){
-                            this.setState({
-                                n: this.state.n + 1
-                            });
-                        } */
+            let num = this.state.n;
+            while (this.props.opened_cards.includes(num)) {
+                num ++;
+            }
+
+            this.setState({
+                n: num
+            });
             openCard(this.state.n, this.props.cards, this.props.lucky_number);
         }
 
