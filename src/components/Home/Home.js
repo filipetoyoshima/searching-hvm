@@ -115,6 +115,8 @@ class Home extends React.Component {
 
     async gameStop(e) {
         // Just stop the game
+        
+        window.location.reload();
         await this.props.stopGame();
         this.setState({
             is_running: false

@@ -37,8 +37,7 @@ export default (state, action) => {
             }
             
         case "OPENED_CARD":
-            
-            if(state.opened_cards !== undefined && !state.opened_cards.includes(action.opened_card)){
+            if(!state.opened_cards.includes(action.opened_card)){
                 return {
                     ...state,
                     opened_cards : [...state.opened_cards, action.opened_card]
@@ -46,6 +45,7 @@ export default (state, action) => {
             }else {
                 return {
                     ...state,
+                    opened_cards: state.opened_cards
                 }
             }
 
@@ -54,7 +54,6 @@ export default (state, action) => {
                 ...state,
                 win_game: action.win_game
             }
-
 
         default:
             return state;

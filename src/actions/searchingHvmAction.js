@@ -22,7 +22,6 @@ export const openCard = (index, cards, lucky_number) => {
     new_cards[index].open = true;
     
     if(lucky_number === new_cards[index].number){
-        console.log("fim");
         return {
             type: "WIN_GAME",
             win_game: true

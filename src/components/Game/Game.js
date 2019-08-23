@@ -124,18 +124,21 @@ class Game extends React.Component {
 
 
         if (!this.props.cards[this.props.current_card_index]) {
+        
             await this.props.openCard(index, this.props.cards, this.props.lucky_number);
+        
             await this.props.openedCard(index);
         }
-
         this.setState({
             reload: !this.state.reload
         })
     }
 
     botTurn = async () => {
+    
         let { closeCard, changeTurn, openCard } = this.props;
         await this.props.changeTurn(this.props.turn_player);
+    
         await this.props.closeCard(this.props.current_card_index, this.props.cards);
         switch (this.props.algorithm) {
             case 'WITH_SENTINEL':
@@ -144,32 +147,36 @@ class Game extends React.Component {
 
             default:
                 openCard(0, this.props.cards, this.props.lucky_number);
-                if(!this.props.win_game){
+                if (!this.props.win_game) {
                     setTimeout(() => {
                         closeCard(this.props.current_card_index, this.props.cards);
                         changeTurn(this.props.turn_player);
                     }, 2000)
                 }
-                    
+
         }
     }
 
     search_with_sentinel = () => {
         let { closeCard, changeTurn, openCard } = this.props;
-
         if (this.state.n <= this.state.i) {
+            /*             if(this.props.opened_cards.includes(this.state.n)){
+                            this.setState({
+                                n: this.state.n + 1
+                            });
+                        } */
             openCard(this.state.n, this.props.cards, this.props.lucky_number);
         }
 
-        if(!this.props.win_game){
+        if (!this.props.win_game) {
             setTimeout(() => {
-                
+
                 closeCard(this.props.current_card_index, this.props.cards);
-                
+
                 changeTurn(this.props.turn_player);
-                
+
             }, 2000)
-            
+
             this.setState({
                 n: this.state.n + 1
             });
