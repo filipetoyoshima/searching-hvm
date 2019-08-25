@@ -1,7 +1,9 @@
+
 export const setArray = (array) => {
     // generate a random number and set them and array in store
     let random_index = Math.floor(Math.random() * array.length);
     let new_array = [];
+    
     array.map(number => {
         let obj = {
             "number": number,
@@ -14,7 +16,7 @@ export const setArray = (array) => {
     return {
         type: "SET_ARRAY",
         cards: new_array,
-        lucky_number: array[random_index]
+        lucky_number: array[random_index],
     }
 }
 
@@ -72,5 +74,19 @@ export const openedCard = (index) => {
     return {
         type: "OPENED_CARD",
         opened_card: index,
+    }
+}
+
+export const nextPlay = (n) => {
+    return {
+        type: "NEXT_PLAY",
+        next_play: n
+    }
+}
+
+export const indexLucky = (i) => {
+    return {
+        type: "INDEX_LUCKY",
+        index_lucky: i
     }
 }

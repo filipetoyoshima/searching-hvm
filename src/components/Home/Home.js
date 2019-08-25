@@ -4,6 +4,7 @@ import Game from '../Game/Game';
 import AlgorithmButton from '../AlgorithmButton/AlgorithmButton';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
+import SequentialSearch from '../SequentialSearch/SequentialSearch';
 
 class Home extends React.Component {
 
@@ -13,12 +14,47 @@ class Home extends React.Component {
             number_of_cells: 10,
             is_running: false,
             text: '',
-            algorithms: ["Busca Sequencial Com Sentinela"],
-            algorithmWithSentinel: false,
+            algorithms: ["Busca Sequencial"],
+            searchWithSentinel: false,
+            algorithm: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.gameStart = this.gameStart.bind(this);
         this.gameStop = this.gameStop.bind(this);
+
+    }
+
+    chooseAlgorithm = () => {
+        switch (this.state.algorithm) {
+            case "SENQUENTIAL":
+                return (
+                    <main>
+                        <SequentialSearch
+                            number_of_cells={this.state.number_of_cells}
+                        />
+                        <button
+                            onClick={this.gameStop}
+                        >
+                            Back to Home
+                    </button>
+                    </main>
+                );
+
+            default:
+                return (
+
+                    <main>
+                        <Game
+                            number_of_cells={this.state.number_of_cells}
+                        />
+                        <button
+                            onClick={this.gameStop}
+                        >
+                            Back to Home
+                            </button>
+                    </main>
+                );
+        }
 
     }
 
@@ -29,18 +65,8 @@ class Home extends React.Component {
 
         if (this.state.is_running) {
             return (
-                <main>
-                    <Game
-                        number_of_cells={this.state.number_of_cells}
-                        algorithm={this.state.algorithm}
-                    />
-                    <button
-                        onClick={this.gameStop}
-                    >
-                        Back to Home
-                    </button>
-                </main>
-            )
+                this.chooseAlgorithm()
+            );
 
             // If the Game is not set up yet (initial state)
             // then renders a menu where the player can
@@ -69,7 +95,7 @@ class Home extends React.Component {
                     <div className="options">
                         <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {
                             this.setState({
-                                algorithmWithSentinel: true
+                                searchWithSentinel: true
                             }, this.gameStart)
                         }} />
                     </div>
@@ -92,14 +118,16 @@ class Home extends React.Component {
         }
     };
 
-    gameStart(e) {
+    gameStart = async (e) => {
         // If the input value is a valid number,
         // then start the game
 
-        if (this.state.algorithmWithSentinel) {
-            this.setState({
-                algorithm: 'WITH_SENTINEL'
+        if (this.state.searchWithSentinel) {
+            await this.setState({
+                algorithm: 'SENQUENTIAL'
             })
+
+
         }
 
         if (this.state.number_of_cells < 1) {

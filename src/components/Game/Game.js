@@ -4,7 +4,6 @@ import NumberBox from '../Number_Box/Number_Box';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import Button from '@material-ui/core/Button';
-import searchWithSentinel from '../../SearchAlgorithms/searchWithSentinel';
 
 
 class Game extends React.Component {
@@ -33,26 +32,27 @@ class Game extends React.Component {
         // - Array of closed and open.
         //   This value will be passed to each number box
 
+        let arr = [];
         let i;
-        let r = Math.floor(Math.random() * 30 + 1);
-        let arr = [r];
-        let open_arr = [false];
+        if (!this.props.array) {
+            let r = Math.floor(Math.random() * 30 + 1);
+            arr = [r];
 
-        for (i = 1; i < this.props.number_of_cells; i++) {
-            r = Math.floor(Math.random() * 30 + 1);
-            arr.push(arr[i - 1] + r);
-            open_arr.push(false);
+            for (i = 1; i < this.props.number_of_cells; i++) {
+                r = Math.floor(Math.random() * 30 + 1);
+                arr.push(arr[i - 1] + r);
+            }
+
+            this.setState({
+                array: arr,
+                i
+            })
+
+            await this.props.setArray(arr);
         }
 
-        await this.props.setArray(arr);
 
-        i = await searchWithSentinel(this.props.cards, this.props.lucky_number);
 
-        this.setState({
-            i,
-            array: arr,
-            is_box_open: open_arr,
-        })
     }
 
     render() {
@@ -124,8 +124,8 @@ class Game extends React.Component {
 
         // Change algorithm
         switch (this.props.algorithm) {
-            case 'WITH_SENTINEL':
-                this.search_with_sentinel();
+            case 'SEQUENTIAL':
+                this.props.search_with_sentinel();
                 return;
 
             default:
@@ -141,41 +141,8 @@ class Game extends React.Component {
         }
     }
 
-
-    //Search with sentinel, where 'i' is the lucky number
-    search_with_sentinel = () => {
-        let { closeCard, changeTurn, openCard } = this.props;
-
-        // Search whilhe number is smaller or equal lucky number's index
-        if (this.state.n <= this.state.i) {
-            let num = this.state.n;
-            // Jump numbers opened before 
-            while (this.props.opened_cards.includes(num)) {
-                num++;
-            }
-
-            this.setState({
-                n: num
-            });
-            openCard(this.state.n, this.props.cards, this.props.lucky_number);
-        }
-
-        if (!this.props.win_game) {
-            setTimeout(() => {
-
-                closeCard(this.props.current_card_index, this.props.cards);
-
-                changeTurn(this.props.turn_player);
-
-            }, 2000)
-
-            this.setState({
-                n: this.state.n + 1
-            });
-        }
-    }
-
 }
+
 const mapStateToProps = state => { return { ...state } };
 
 const mapDispatchToProps = dispatch => ({

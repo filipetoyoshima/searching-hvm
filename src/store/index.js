@@ -15,6 +15,10 @@ const INITIAL_STATE = {
     opened_cards: [],
 
     win_game: false,
+
+    next_play: 0,
+
+    index_lucky: -1
 };
 
 function configureStore(state = INITIAL_STATE) {
