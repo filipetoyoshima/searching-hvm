@@ -30,26 +30,11 @@ class Game extends React.Component {
         // - Array of closed and open.
         //   This value will be passed to each number box
 
-        let arr = [];
-        let i;
-        if (!this.props.array) {
-            let r = Math.floor(Math.random() * 30 + 1);
-            arr = [r];
-
-            for (i = 1; i < this.props.number_of_cells; i++) {
-                r = Math.floor(Math.random() * 30 + 1);
-                arr.push(arr[i - 1] + r);
-            }
-
-            this.setState({
-                array: arr,
-            })
-
-            await this.props.setArray(arr);
+        if (this.props.array) {
+            await this.props.setArray(this.props.number_of_cells, this.props.array);
+        }else{
+            await this.props.setArray(this.props.number_of_cells);
         }
-
-
-
     }
 
     render() {
@@ -125,6 +110,10 @@ class Game extends React.Component {
                 this.props.search_with_sentinel();
                 return;
 
+            case 'BINARY':
+                this.props.search_binary();
+                return;
+
             default:
                 // In default case, bot just open the first card
                 openCard(0, this.props.cards, this.props.lucky_number);
@@ -143,7 +132,7 @@ class Game extends React.Component {
 const mapStateToProps = state => { return { ...state } };
 
 const mapDispatchToProps = dispatch => ({
-    setArray: (arr) => dispatch(searchingHvmAction.setArray(arr)),
+    setArray: (number_of_cells, array) => dispatch(searchingHvmAction.setArray(number_of_cells, array)),
     openCard: (index, arr, lucky) => dispatch(searchingHvmAction.openCard(index, arr, lucky)),
     closeCard: (index, arr) => dispatch(searchingHvmAction.closeCard(index, arr)),
     changeTurn: (turn) => dispatch(searchingHvmAction.changeTurn(turn)),

@@ -20,7 +20,7 @@ class SequentialSearch extends React.Component {
         let i = 0;
         let array = [];
 
-        for (i = 0; i < this.props.number_of_cellss; i++) {
+        for (i = 0; i < this.props.number_of_cells; i++) {
             let r = Math.floor(Math.random() * 1000) + 1;
             array.push(r);
         }
@@ -29,7 +29,7 @@ class SequentialSearch extends React.Component {
             array: array,
         })
 
-        await this.props.setArray(array);
+        await this.props.setArray(this.props.number_of_cells, array);
         console.warn(this.state.array);
         console.warn(this.props.number_of_cells);
 
@@ -83,7 +83,7 @@ class SequentialSearch extends React.Component {
 const mapStateToProps = state => { return { ...state } };
 
 const mapDispatchToProps = dispatch => ({
-    setArray: (arr) => dispatch(searchingHvmAction.setArray(arr)),
+    setArray: (number_of_cells, array) => dispatch(searchingHvmAction.setArray(number_of_cells, array)),
     openCard: (index, arr, lucky) => dispatch(searchingHvmAction.openCard(index, arr, lucky)),
     closeCard: (index, arr) => dispatch(searchingHvmAction.closeCard(index, arr)),
     changeTurn: (turn) => dispatch(searchingHvmAction.changeTurn(turn)),

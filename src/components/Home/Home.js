@@ -5,6 +5,7 @@ import AlgorithmButton from '../AlgorithmButton/AlgorithmButton';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import SequentialSearch from '../SequentialSearch/SequentialSearch';
+import Binary_Search from '../BinarySearch/Binary_Search';
 
 class Home extends React.Component {
 
@@ -14,7 +15,7 @@ class Home extends React.Component {
             number_of_cells: 10,
             is_running: false,
             text: '',
-            algorithms: ["Busca Sequencial"],
+            algorithms: ["Busca Sequencial", "Busca Binária"],
             searchWithSentinel: false,
             algorithm: ''
         }
@@ -32,11 +33,15 @@ class Home extends React.Component {
                         <SequentialSearch
                             number_of_cells={this.state.number_of_cells}
                         />
-                        <button
-                            onClick={this.gameStop}
-                        >
-                            Back to Home
-                        </button>
+                    </main>
+                );
+
+            case "BINARY":
+                return (
+                    <main>
+                        <Binary_Search
+                            number_of_cells={this.state.number_of_cells}
+                        />
                     </main>
                 );
 
@@ -47,11 +52,6 @@ class Home extends React.Component {
                         <Game
                             number_of_cells={this.state.number_of_cells}
                         />
-                        <button
-                            onClick={this.gameStop}
-                        >
-                            Back to Home
-                        </button>
                     </main>
                 );
         }
@@ -65,7 +65,14 @@ class Home extends React.Component {
 
         if (this.state.is_running) {
             return (
-                this.chooseAlgorithm()
+                <>
+                    {this.chooseAlgorithm()}
+                    <button
+                        onClick={this.gameStop}
+                    >
+                        Back to Home
+                    </button>
+                </>
             );
 
             // If the Game is not set up yet (initial state)
@@ -96,6 +103,11 @@ class Home extends React.Component {
                         <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {
                             this.setState({
                                 searchWithSentinel: true
+                            }, this.gameStart)
+                        }} />
+                        <AlgorithmButton text={this.state.algorithms[1]} onClick={() => {
+                            this.setState({
+                                algorithm: 'BINARY'
                             }, this.gameStart)
                         }} />
                     </div>

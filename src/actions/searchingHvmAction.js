@@ -1,6 +1,22 @@
 
-export const setArray = (array) => {
+export const setArray = (number_of_cells=0, array=undefined) => {
     // generate a random number and set them and array in store
+
+    console.log(array, "before if")
+
+    if (array === undefined) {
+        let i;
+        let r = Math.floor(Math.random() * 30 + 1);
+        array = [r];
+
+        for (i = 1; i < number_of_cells; i++) {
+            r = Math.floor(Math.random() * 30 + 1);
+            array.push(array[i - 1] + r);
+        }
+    }
+
+    console.log(array, "after if")
+
     let random_index = Math.floor(Math.random() * array.length);
     let new_array = [];
     
@@ -22,6 +38,8 @@ export const setArray = (array) => {
 
 export const openCard = (index, cards, lucky_number) => {
     let new_cards = cards;
+    console.log(cards, "input");
+    console.log(new_cards, "variable");
     new_cards[index].open = true;
 
     if (lucky_number === new_cards[index].number) {
