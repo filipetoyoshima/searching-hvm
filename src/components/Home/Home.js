@@ -5,7 +5,7 @@ import AlgorithmButton from '../AlgorithmButton/AlgorithmButton';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import SequentialSearch from '../SequentialSearch/SequentialSearch';
-import Binary_Search from '../BinarySearch/Binary_Search';
+import BinarySearch from '../BinarySearch/Binary_Search';
 
 class Home extends React.Component {
 
@@ -39,7 +39,7 @@ class Home extends React.Component {
             case "BINARY":
                 return (
                     <main>
-                        <Binary_Search
+                        <BinarySearch
                             number_of_cells={this.state.number_of_cells}
                         />
                     </main>

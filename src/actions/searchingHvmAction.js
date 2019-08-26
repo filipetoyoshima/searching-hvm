@@ -15,8 +15,6 @@ export const setArray = (number_of_cells=0, array=undefined) => {
         }
     }
 
-    console.log(array, "after if")
-
     let random_index = Math.floor(Math.random() * array.length);
     let new_array = [];
     
@@ -38,8 +36,7 @@ export const setArray = (number_of_cells=0, array=undefined) => {
 
 export const openCard = (index, cards, lucky_number) => {
     let new_cards = cards;
-    console.log(cards, "input");
-    console.log(new_cards, "variable");
+
     new_cards[index].open = true;
 
     if (lucky_number === new_cards[index].number) {

@@ -3,7 +3,6 @@ import Game from '../Game/Game';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 
-
 class SequentialSearch extends React.Component {
     constructor(props) {
         super(props);
@@ -30,9 +29,6 @@ class SequentialSearch extends React.Component {
         })
 
         await this.props.setArray(this.props.number_of_cells, array);
-        console.warn(this.state.array);
-        console.warn(this.props.number_of_cells);
-
     }
 
     render() {

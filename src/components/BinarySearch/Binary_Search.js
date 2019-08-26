@@ -3,18 +3,19 @@ import Game from '../Game/Game';
 import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 
-class Binary_Search extends React.Component {
+class BinarySearch extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             bigger_index: this.props.number_of_cells,
-            smaller_index: 0
+            smaller_index: 0,
         }
     }
 
     componentDidMount = async () => {
         console.log("cheguei aqui")
         await this.props.setArray(this.props.number_of_cells);
+        console.log(this.props)
     }
 
     render() {
@@ -23,24 +24,19 @@ class Binary_Search extends React.Component {
                 <Game
                     number_of_cells={this.props.number_of_cells}
                     algorithm="BINARY"
-                    search_binary={this.search_binary()}
+                    search_binary={this.search_binary}
                 />
             </main>
         );
     }
 
 
-    search_binary() {
-
-        if (this.props.cards === []) {
-            return;
-        }
+    search_binary = async() => {
 
         let { closeCard, changeTurn, openCard } = this.props;
-        let mid = Math.floor((this.state.bigger_index - this.state.smaller_index) / 2);
-
-        console.log(mid)
-        console.log(this.props.cards, "oi")
+        let mid = Math.floor(
+            (this.state.bigger_index - this.state.smaller_index) / 2 + this.state.smaller_index
+        );
 
         openCard(mid, this.props.cards, this.props.lucky_number);
 
@@ -55,13 +51,13 @@ class Binary_Search extends React.Component {
 
             }, 2000)
 
-            if (this.props.cards[actual_card] < this.props.lucky_number) {
+            if (this.props.lucky_number > this.props.cards[actual_card].number) {
                 this.setState({
-                    bigger_index: mid
+                    smaller_index: mid
                 })
             } else {
                 this.setState({
-                    smaller_index: mid
+                    bigger_index: mid
                 })
             }
         }
@@ -80,4 +76,4 @@ const mapDispatchToProps = dispatch => ({
     indexLucky: (i) => dispatch(searchingHvmAction.indexLucky(i))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Binary_Search);
+export default connect(mapStateToProps, mapDispatchToProps)(BinarySearch);

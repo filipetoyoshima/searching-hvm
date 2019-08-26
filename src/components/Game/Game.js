@@ -111,6 +111,8 @@ class Game extends React.Component {
                 return;
 
             case 'BINARY':
+                console.log("BINARY", this.props.cards);
+                
                 this.props.search_binary();
                 return;
 
