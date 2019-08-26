@@ -67,10 +67,10 @@ class Game extends React.Component {
                             <div className="bot_turn">
                                 <h1>
                                     Find the number {this.props.lucky_number}!
-                    </h1>
+                                </h1>
                                 <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
                                     Bot Turn!
-                    </Button>
+                                </Button>
                             </div>
                             <div className='boxes-container'>
                                 {

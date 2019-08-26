@@ -31,8 +31,6 @@ class SequentialSearch extends React.Component {
 
         await this.props.setArray(array);
 
-
-
     }
 
     render() {
@@ -78,7 +76,6 @@ class SequentialSearch extends React.Component {
             await this.props.nextPlay(this.props.next_play + 1);
         }
     }
-
 }
 
 const mapStateToProps = state => { return { ...state } };

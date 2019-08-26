@@ -36,7 +36,7 @@ class Home extends React.Component {
                             onClick={this.gameStop}
                         >
                             Back to Home
-                    </button>
+                        </button>
                     </main>
                 );
 
@@ -51,7 +51,7 @@ class Home extends React.Component {
                             onClick={this.gameStop}
                         >
                             Back to Home
-                            </button>
+                        </button>
                     </main>
                 );
         }
@@ -131,9 +131,11 @@ class Home extends React.Component {
         }
 
         if (this.state.number_of_cells < 1) {
-            // warn the user here!
-            // i'm too lazy to do it right now
-            // c'mon, it's 23:28 now... I got to wake up early tomorrow
+            // ---------------------------------------------------------- //
+            // warn the user here!                                        //
+            // i'm too lazy to do it right now                            //
+            // c'mon, it's 23:28 now... I got to wake up early tomorrow   //
+            // ---------------------------------------------------------- //
         } else {
             this.setState({
                 is_running: true
