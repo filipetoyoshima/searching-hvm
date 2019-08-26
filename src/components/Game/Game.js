@@ -17,8 +17,6 @@ class Game extends React.Component {
             is_bot_turn: false,
             last_box: -1,
             reload: true,
-            i: 0,
-            n: 0
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -45,7 +43,6 @@ class Game extends React.Component {
 
             this.setState({
                 array: arr,
-                i
             })
 
             await this.props.setArray(arr);
@@ -63,35 +60,35 @@ class Game extends React.Component {
                         {this.props.turn_player ? "Você Ganhou" : "Você Perdeu"}
                     </h1>
                 ) : (
-                        <>
-                            <div className="bot_turn">
-                                <h1>
-                                    Find the number {this.props.lucky_number}!
-                                </h1>
-                                <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
-                                    Bot Turn!
-                                </Button>
-                            </div>
-                            <div className='boxes-container'>
-                                {
-                                    // Render a NumberBox for each element in
-                                    // numbers array, from componentDidMount()
-                                    this.props.cards.map((card, index) =>
-                                        <div
-                                            onClick={() => this.handleClick(index)}
-                                            className='inside-container'
-                                            key={'div' + index}>
-                                            <NumberBox
-                                                number={card.number}
-                                                is_open={card.open}
-                                                index={index}
-                                                key={index}
-                                            />
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        </>
+                    <>
+                        <div className="bot_turn">
+                            <h1>
+                                Find the number {this.props.lucky_number}!
+                            </h1>
+                            <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
+                                Bot Turn!
+                            </Button>
+                        </div>
+                        <div className='boxes-container'>
+                            {
+                                // Render a NumberBox for each element in
+                                // numbers array, from componentDidMount()
+                                this.props.cards.map((card, index) =>
+                                    <div
+                                        onClick={() => this.handleClick(index)}
+                                        className='inside-container'
+                                        key={'div' + index}>
+                                        <NumberBox
+                                            number={card.number}
+                                            is_open={card.open}
+                                            index={index}
+                                            key={index}
+                                        />
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </>
                     )}
             </div>
         )

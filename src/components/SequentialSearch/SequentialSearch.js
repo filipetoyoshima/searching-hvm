@@ -20,16 +20,18 @@ class SequentialSearch extends React.Component {
         let i = 0;
         let array = [];
 
-        for (i = 0; i < this.props.number_of_cells - 1; i++) {
+        for (i = 0; i < this.props.number_of_cellss; i++) {
             let r = Math.floor(Math.random() * 1000) + 1;
             array.push(r);
         }
 
         this.setState({
-            array,
+            array: array,
         })
 
         await this.props.setArray(array);
+        console.warn(this.state.array);
+        console.warn(this.props.number_of_cells);
 
     }
 
