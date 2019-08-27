@@ -28,6 +28,7 @@ class InterpolationSearch extends React.Component {
                     algorithm="INTERPOLATION"
                     smart={this.props.smart}
                     interpolation_search={this.interpolation_search}
+                    update_known_set={this.update_known_set}
                 />
             </main>
         )
@@ -72,6 +73,25 @@ class InterpolationSearch extends React.Component {
                     max_value: this.props.cards[actual_card].number
                 })
             }
+        }
+    }
+
+    update_known_set = async() => {
+        let actual_card = this.props.cards[this.props.current_card_index].number
+        let index = this.props.current_card_index
+        if (index > this.state.max_index || index < this.min_index) {
+            return
+        }
+        if (this.props.lucky_number > actual_card) {
+            this.setState({
+                min_index: index,
+                min_value: actual_card
+            })
+        } else {
+            this.setState({
+                max_index: index,
+                max_value: actual_card
+            })
         }
     }
 }

@@ -20,7 +20,8 @@ class Home extends React.Component {
                 "Busca Sequencial",
                 "Busca Binária",
                 "Busca Binária Inteligente",
-                "Busca por Interpolação"
+                "Busca por Interpolação",
+                "Busca por Interpolação Inteligente"
             ],
             searchWithSentinel: false,
             algorithm: '',
@@ -58,6 +59,7 @@ class Home extends React.Component {
                     <main>
                         <InterpolationSearch
                             number_of_cells={this.state.number_of_cells}
+                            smart={this.state.smart}
                         />
                     </main>
                 )
@@ -124,7 +126,8 @@ class Home extends React.Component {
                         }} />
                         <AlgorithmButton text={this.state.algorithms[1]} onClick={() => {
                             this.setState({
-                                algorithm: 'BINARY'
+                                algorithm: 'BINARY',
+                                smart: false,
                             }, this.gameStart)
                         }} />
                         <AlgorithmButton text={this.state.algorithms[2]} onClick={() => {
@@ -136,6 +139,13 @@ class Home extends React.Component {
                         <AlgorithmButton text={this.state.algorithms[3]} onClick={() => {
                             this.setState({
                                 algorithm: 'INTERPOLATION',
+                                smart: false,
+                            }, this.gameStart)
+                        }} />
+                        <AlgorithmButton text={this.state.algorithms[4]} onClick={() => {
+                            this.setState({
+                                algorithm: 'INTERPOLATION',
+                                smart: true
                             }, this.gameStart)
                         }} />
                     </div>
