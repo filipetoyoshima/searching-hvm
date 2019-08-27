@@ -118,6 +118,10 @@ class Game extends React.Component {
                 this.props.search_binary();
                 return;
 
+            case 'INTERPOLATION':
+                this.props.interpolation_search();
+                return;
+
             default:
                 // In default case, bot just open the first card
                 openCard(0, this.props.cards, this.props.lucky_number);

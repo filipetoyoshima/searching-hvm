@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import SequentialSearch from '../SequentialSearch/SequentialSearch';
 import BinarySearch from '../BinarySearch/Binary_Search';
+import InterpolationSearch from '../InterpolationSearch/InterpolationSearch';
 
 class Home extends React.Component {
 
@@ -18,7 +19,8 @@ class Home extends React.Component {
             algorithms: [
                 "Busca Sequencial",
                 "Busca Binária",
-                "Busca Binária Inteligente"
+                "Busca Binária Inteligente",
+                "Busca por Interpolação"
             ],
             searchWithSentinel: false,
             algorithm: '',
@@ -50,6 +52,15 @@ class Home extends React.Component {
                         />
                     </main>
                 );
+
+            case "INTERPOLATION":
+                return (
+                    <main>
+                        <InterpolationSearch
+                            number_of_cells={this.state.number_of_cells}
+                        />
+                    </main>
+                )
 
             default:
                 return (
@@ -120,6 +131,11 @@ class Home extends React.Component {
                             this.setState({
                                 algorithm: 'BINARY',
                                 smart: true
+                            }, this.gameStart)
+                        }} />
+                        <AlgorithmButton text={this.state.algorithms[3]} onClick={() => {
+                            this.setState({
+                                algorithm: 'INTERPOLATION',
                             }, this.gameStart)
                         }} />
                     </div>
