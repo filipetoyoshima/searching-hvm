@@ -15,9 +15,14 @@ class Home extends React.Component {
             number_of_cells: 10,
             is_running: false,
             text: '',
-            algorithms: ["Busca Sequencial", "Busca Binária"],
+            algorithms: [
+                "Busca Sequencial",
+                "Busca Binária",
+                "Busca Binária Inteligente"
+            ],
             searchWithSentinel: false,
-            algorithm: ''
+            algorithm: '',
+            smart: false,
         }
         this.handleChange = this.handleChange.bind(this);
         this.gameStart = this.gameStart.bind(this);
@@ -41,6 +46,7 @@ class Home extends React.Component {
                     <main>
                         <BinarySearch
                             number_of_cells={this.state.number_of_cells}
+                            smart={this.state.smart}
                         />
                     </main>
                 );
@@ -75,9 +81,9 @@ class Home extends React.Component {
                 </>
             );
 
-            // If the Game is not set up yet (initial state)
-            // then renders a menu where the player can
-            // set up things and click on button to start the game 
+        // If the Game is not set up yet (initial state)
+        // then renders a menu where the player can
+        // set up things and click on button to start the game 
         } else {
             return (
                 <div className='container'>
@@ -108,6 +114,12 @@ class Home extends React.Component {
                         <AlgorithmButton text={this.state.algorithms[1]} onClick={() => {
                             this.setState({
                                 algorithm: 'BINARY'
+                            }, this.gameStart)
+                        }} />
+                        <AlgorithmButton text={this.state.algorithms[2]} onClick={() => {
+                            this.setState({
+                                algorithm: 'BINARY',
+                                smart: true
                             }, this.gameStart)
                         }} />
                     </div>

@@ -13,9 +13,7 @@ class BinarySearch extends React.Component {
     }
 
     componentDidMount = async () => {
-        console.log("cheguei aqui")
         await this.props.setArray(this.props.number_of_cells);
-        console.log(this.props)
     }
 
     render() {
@@ -24,6 +22,8 @@ class BinarySearch extends React.Component {
                 <Game
                     number_of_cells={this.props.number_of_cells}
                     algorithm="BINARY"
+                    smart={this.props.smart}
+                    update_known_set={this.update_known_set}
                     search_binary={this.search_binary}
                 />
             </main>
@@ -32,7 +32,6 @@ class BinarySearch extends React.Component {
 
 
     search_binary = async() => {
-
         let { closeCard, changeTurn, openCard } = this.props;
         let mid = Math.floor(
             (this.state.bigger_index - this.state.smaller_index) / 2 + this.state.smaller_index
@@ -60,6 +59,23 @@ class BinarySearch extends React.Component {
                     bigger_index: mid
                 })
             }
+        }
+    }
+
+    update_known_set = async() => {
+        let actual_card = this.props.cards[this.props.current_card_index].number
+        let index = this.props.current_card_index
+        if (index > this.state.bigger_index || index < this.smaller_index) {
+            return
+        }
+        if (this.props.lucky_number > actual_card) {
+            this.setState({
+                smaller_index: index
+            })
+        } else {
+            this.setState({
+                bigger_index: index
+            })
         }
     }
 }

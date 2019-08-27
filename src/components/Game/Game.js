@@ -89,6 +89,10 @@ class Game extends React.Component {
             await this.props.openedCard(index);
         }
 
+        if (this.props.smart && !this.props.win_game) {
+            await this.props.update_known_set();
+        }
+
         this.setState({
             reload: !this.state.reload
         })
@@ -110,9 +114,7 @@ class Game extends React.Component {
                 this.props.search_with_sentinel();
                 return;
 
-            case 'BINARY':
-                console.log("BINARY", this.props.cards);
-                
+            case 'BINARY':                
                 this.props.search_binary();
                 return;
 
