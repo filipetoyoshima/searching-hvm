@@ -9,6 +9,28 @@
     position: relative;
 }
 
+.number-box-winner {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background-color: green;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+}
+
+.number-box-loser {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+}
+
 .number {
     line-height: 60px;
     font-size: 22px;

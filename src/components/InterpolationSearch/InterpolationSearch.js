@@ -49,9 +49,6 @@ class InterpolationSearch extends React.Component {
             guess = this.state.min_index + 1
         }
 
-        console.log(this.state.max_index, "max");
-        console.log(this.state.min_index, "min");
-        console.log(guess, "guess")
         openCard(guess, this.props.cards, this.props.lucky_number);
 
         if (!this.props.win_game) {

@@ -1,5 +1,7 @@
 import React from 'react'
 import './Number_Box.css'
+import { connect } from 'react-redux';
+
 
 class NumberBox extends React.Component {
     constructor(props){
@@ -8,19 +10,18 @@ class NumberBox extends React.Component {
         // - is_open, a boolean value that tell if the box is open
         // - number, the number that the box represents
         // - index, an integer the tell which box is it
+
         this.getNumber = this.getNumber.bind(this)
     }
 
     render() {
         return (
-            <div className='number-box'
-                onClick={this.open_box}
-            >
+            <div className={this.getClass()}>
                 <div className='number'>
                     {this.getNumber()}
                 </div>
                 <div className='corner-number'>
-                    {this.props.index + 1}
+                    {this.props.index}
                 </div>
             </div>
         )
@@ -33,6 +34,23 @@ class NumberBox extends React.Component {
             return '?'
         }
     }
+
+    getClass() {
+        let class_name = 'number-box'
+        if (this.props.win_game && this.props.is_open) {
+            if (this.props.turn_player) {
+                class_name = 'number-box-winner';
+            } else {
+                class_name = 'number-box-loser';
+            }
+        }
+        return class_name
+    }
 }
 
-export default NumberBox
+const mapStateToProps = state => { return { ...state } };
+
+const mapDispatchToProps = dispatch => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NumberBox);
