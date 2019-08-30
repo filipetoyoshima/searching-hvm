@@ -2,7 +2,7 @@
 export const setArray = (number_of_cells=0, array=undefined) => {
     // generate a random number and set them and array in store
 
-    console.log(array, "before if")
+    // console.log(array, "before if")
 
     if (array === undefined) {
         let i;
@@ -15,7 +15,7 @@ export const setArray = (number_of_cells=0, array=undefined) => {
         }
     }
 
-    console.log(array, "after if")
+    // console.log(array, "after if")
 
     let random_index = Math.floor(Math.random() * array.length);
     let new_array = [];

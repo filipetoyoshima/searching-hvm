@@ -113,11 +113,6 @@ class Home extends React.Component {
                             marginTop: 10
                         }}
                     />
-                    <button
-                        onClick={this.gameStart}
-                    >
-                        Go!
-                    </button>
                     <div className="options">
                         <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {
                             this.setState({
