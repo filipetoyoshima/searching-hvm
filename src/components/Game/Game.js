@@ -50,7 +50,11 @@ class Game extends React.Component {
                         <h1>
                             Find the number {this.props.lucky_number}!
                         </h1>
-                        <Button variant="contained" color="secondary" disabled={!this.props.turn_player} onClick={() => this.botTurn()}>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            disabled={!this.props.turn_player || this.props.win_game}
+                            onClick={() => this.botTurn()}>
                             Bot Turn!
                         </Button>
                     </div>
@@ -81,6 +85,10 @@ class Game extends React.Component {
     handleClick = async (index) => {
         // Player's turn!
         // Block a second click before bot's play
+        if (this.props.win_game) {
+            return;
+        }
+
         if (!this.props.cards[this.props.current_card_index]) {
 
             await this.props.openCard(index, this.props.cards, this.props.lucky_number);
