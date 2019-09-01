@@ -7,6 +7,7 @@ import * as searchingHvmAction from '../../actions/searchingHvmAction';
 import SequentialSearch from '../SequentialSearch/SequentialSearch';
 import BinarySearch from '../BinarySearch/Binary_Search';
 import InterpolationSearch from '../InterpolationSearch/InterpolationSearch';
+import IndexedSequentialSearch from '../IndexedSequentialSearch/IndexedSequentialSearch';
 
 class Home extends React.Component {
 
@@ -18,10 +19,11 @@ class Home extends React.Component {
             text: '',
             algorithms: [
                 "Busca Sequencial",
+                "Busca Sequencial Indexada",
                 "Busca Binária",
                 "Busca Binária Inteligente",
                 "Busca por Interpolação",
-                "Busca por Interpolação Inteligente"
+                "Busca por Interpolação Inteligente",
             ],
             searchWithSentinel: false,
             algorithm: '',
@@ -40,6 +42,16 @@ class Home extends React.Component {
                     <main>
                         <SequentialSearch
                             number_of_cells={this.state.number_of_cells}
+                        />
+                    </main>
+                );
+
+            case "INDEXEDSEQUENTIAL":
+                return (
+                    <main>
+                        <IndexedSequentialSearch
+                            number_of_cells={this.state.number_of_cells}
+                            indexed={true}
                         />
                     </main>
                 );
@@ -94,9 +106,9 @@ class Home extends React.Component {
                 </>
             );
 
-        // If the Game is not set up yet (initial state)
-        // then renders a menu where the player can
-        // set up things and click on button to start the game 
+            // If the Game is not set up yet (initial state)
+            // then renders a menu where the player can
+            // set up things and click on button to start the game 
         } else {
             return (
                 <div className='container'>
@@ -121,23 +133,29 @@ class Home extends React.Component {
                         }} />
                         <AlgorithmButton text={this.state.algorithms[1]} onClick={() => {
                             this.setState({
-                                algorithm: 'BINARY',
-                                smart: false,
+                                algorithm: 'INDEXEDSEQUENTIAL',
+                                smart: true
                             }, this.gameStart)
                         }} />
                         <AlgorithmButton text={this.state.algorithms[2]} onClick={() => {
                             this.setState({
                                 algorithm: 'BINARY',
-                                smart: true
+                                smart: false,
                             }, this.gameStart)
                         }} />
                         <AlgorithmButton text={this.state.algorithms[3]} onClick={() => {
+                            this.setState({
+                                algorithm: 'BINARY',
+                                smart: true
+                            }, this.gameStart)
+                        }} />
+                        <AlgorithmButton text={this.state.algorithms[4]} onClick={() => {
                             this.setState({
                                 algorithm: 'INTERPOLATION',
                                 smart: false,
                             }, this.gameStart)
                         }} />
-                        <AlgorithmButton text={this.state.algorithms[4]} onClick={() => {
+                        <AlgorithmButton text={this.state.algorithms[5]} onClick={() => {
                             this.setState({
                                 algorithm: 'INTERPOLATION',
                                 smart: true
