@@ -92,14 +92,15 @@ class IndexedSequentialSearch extends React.Component {
 
     first_index = () => {
         let aux = 0;
-        let i;
-        let {cards, index_lucky} = this.props;
+        let {cards, lucky_number} = this.props;
+        let i = 0;
 
-        for (i = 0; i < this.state.indexes.length ; i++ ) {
-            if(this.state.indexes[i] <= index_lucky){
+        this.state.indexes.forEach(index => {
+            if(cards[index].number <= lucky_number){
                 aux = i;
             }
-        }
+            i++;
+        })
         
         return this.state.indexes[aux];
     }
