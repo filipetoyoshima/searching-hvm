@@ -21,10 +21,11 @@ export const setArray = (number_of_cells=0, array=undefined) => {
     array.map(number => {
         let obj = {
             "number": number,
-            "open": false
+            "open": false,
         }
 
         new_array.push(obj);
+
     });
 
     return {

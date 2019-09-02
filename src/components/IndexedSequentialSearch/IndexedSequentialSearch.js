@@ -12,7 +12,8 @@ class IndexedSequentialSearch extends React.Component {
             last_box: -1,
             reload: true,
             indexes: [],
-            indexed: false
+            indexed: false,
+            interval: 1
         }
     }
 
@@ -23,8 +24,8 @@ class IndexedSequentialSearch extends React.Component {
         let interval = (this.props.number_of_cells / 100) * 10;
         interval = interval < 1 ? 0 : interval;
         let indexes = [];
-        
-        
+
+
         for (i = 0; i < this.props.number_of_cells; i = i + interval) {
             indexes.push(i);
         }
@@ -32,7 +33,8 @@ class IndexedSequentialSearch extends React.Component {
 
         this.setState({
             indexes,
-            indexed: this.props.indexed || this.state.indexed
+            indexed: this.props.indexed || this.state.indexed,
+            interval
         })
 
     }
@@ -53,18 +55,9 @@ class IndexedSequentialSearch extends React.Component {
     search_with_sentinel = async () => {
 
         let { closeCard, changeTurn, openCard } = this.props;
+        let num = this.props.next_play;
+        let increment = 1;
 
-        let num = 0;
-
-        if (this.state.indexed) {
-            num = this.first_index();
-            let indexed = false;
-            this.setState({
-                indexed
-            });
-        } else {
-            num = this.props.next_play;
-        }
 
         // Jump numbers opened before 
         while (this.props.opened_cards.includes(num)) {
@@ -76,6 +69,19 @@ class IndexedSequentialSearch extends React.Component {
         openCard(this.props.next_play, this.props.cards, this.props.lucky_number);
 
 
+        if (this.state.indexed) {
+            increment = this.state.interval
+            console.log(this.props.cards[this.props.current_card_index]);
+            if (this.props.cards[this.props.current_card_index].number > this.props.lucky_number) {
+                increment = ( -1 * this.state.interval) + 1;
+                console.log(this.state.interval);
+                let indexed = false;
+                this.setState({
+                    indexed
+                })
+            }
+        }
+
         if (!this.props.win_game) {
             setTimeout(() => {
 
@@ -85,25 +91,10 @@ class IndexedSequentialSearch extends React.Component {
 
             }, 2000)
 
-            await this.props.nextPlay(this.props.next_play + 1);
+            await this.props.nextPlay(this.props.next_play + increment);
         }
     }
 
-
-    first_index = () => {
-        let aux = 0;
-        let {cards, lucky_number} = this.props;
-        let i = 0;
-
-        this.state.indexes.forEach(index => {
-            if(cards[index].number <= lucky_number){
-                aux = i;
-            }
-            i++;
-        })
-        
-        return this.state.indexes[aux];
-    }
 }
 
 const mapStateToProps = state => { return { ...state } };

@@ -32,7 +32,7 @@ class Game extends React.Component {
 
         if (this.props.array) {
             await this.props.setArray(this.props.number_of_cells, this.props.array);
-        }else{
+        } else {
             await this.props.setArray(this.props.number_of_cells);
         }
     }
@@ -124,7 +124,7 @@ class Game extends React.Component {
                 this.props.search_with_sentinel();
                 return;
 
-            case 'BINARY':                
+            case 'BINARY':
                 this.props.search_binary();
                 return;
 
@@ -152,8 +152,8 @@ class Game extends React.Component {
                 return (
                     <>
                         <p>
-                            The numbers below are between 0 and 1000<br/>
-                            They are not sorted, this is all random<br/>
+                            The numbers below are between 0 and 1000<br />
+                            They are not sorted, this is all random<br />
                             The algorithm will try every card that was not tried yet
                         </p>
                     </>
@@ -162,12 +162,12 @@ class Game extends React.Component {
                 return (
                     <>
                         <p>
-                            Each number is 1~30 bigger then the previous, that is, they are orderd.<br/>
+                            Each number is 1~30 bigger then the previous, that is, they are orderd.<br />
                         </p>
                         <p>
-                            The algorithm will guess the middle of the sequence.<br/>
-                            If the guessed number is greater then the searched one, discard everything at left.<br/>
-                            If not, the algorithm will discard everything at right.<br/>
+                            The algorithm will guess the middle of the sequence.<br />
+                            If the guessed number is greater then the searched one, discard everything at left.<br />
+                            If not, the algorithm will discard everything at right.<br />
                             And then guess the middle of the numbers that was not discarded.
                         </p>
                     </>
@@ -176,17 +176,21 @@ class Game extends React.Component {
                 return (
                     <>
                         <p>
-                            Each number is 1~30 bigger then the previous, that is, they are ordered<br/>
+                            Each number is 1~30 bigger then the previous, that is, they are ordered<br />
                         </p>
                         <p>
-                            The algorithm will do some math to try to estimate the position of the right number<br/>
-                            The math is based on a linear distribution based on the known numbers<br/>
-                            Each card that the algorithm opens is added to the known cards<br/>
+                            The algorithm will do some math to try to estimate the position of the right number<br />
+                            The math is based on a linear distribution based on the known numbers<br />
+                            Each card that the algorithm opens is added to the known cards<br />
                             If nothing is known yet, the algorithm assumes a linear distribution of 15 between each number.
                         </p>
                     </>
-                )
-            
+                );
+            default:
+                return (
+                    <>
+                    </>
+                );
         }
     }
 
