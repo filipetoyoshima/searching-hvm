@@ -123,6 +123,10 @@ class Game extends React.Component {
             case 'SEQUENTIAL':
                 this.props.search_with_sentinel();
                 return;
+            
+            case 'INDEXEDSEQUENTIAL':
+                this.props.search_with_sentinel();
+                return;
 
             case 'BINARY':
                 this.props.search_binary();
@@ -146,6 +150,7 @@ class Game extends React.Component {
     }
 
     getText() {
+        console.log(this.props.algorithm, 'algorithm')
 
         switch (this.props.algorithm) {
             case 'SEQUENTIAL':
@@ -155,6 +160,18 @@ class Game extends React.Component {
                             The numbers below are between 0 and 1000<br />
                             They are not sorted, this is all random<br />
                             The algorithm will try every card that was not tried yet
+                        </p>
+                    </>
+                );
+            case 'INDEXEDSEQUENTIAL':
+                return (
+                    <>
+                        <p>
+                            Each number is 1~30 bigger then the previous, that is, they are orderd.<br/>
+                        </p>
+                        <p>
+                            The algorithm will jump some cards trying to find a interval where the right number is<br/>
+                            After finding the interval, it will try one by one, until find the one.
                         </p>
                     </>
                 );

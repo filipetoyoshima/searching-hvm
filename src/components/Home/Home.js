@@ -128,13 +128,13 @@ class Home extends React.Component {
                     <div className="options">
                         <AlgorithmButton text={this.state.algorithms[0]} onClick={() => {
                             this.setState({
-                                searchWithSentinel: true
+                                algorithm: 'SENQUENTIAL'
                             }, this.gameStart)
                         }} />
                         <AlgorithmButton text={this.state.algorithms[1]} onClick={() => {
                             this.setState({
                                 algorithm: 'INDEXEDSEQUENTIAL',
-                                smart: true
+                                smart: false,
                             }, this.gameStart)
                         }} />
                         <AlgorithmButton text={this.state.algorithms[2]} onClick={() => {
@@ -184,14 +184,6 @@ class Home extends React.Component {
     gameStart = async (e) => {
         // If the input value is a valid number,
         // then start the game
-
-        if (this.state.searchWithSentinel) {
-            await this.setState({
-                algorithm: 'SENQUENTIAL'
-            })
-
-
-        }
 
         if (this.state.number_of_cells < 1) {
             // ---------------------------------------------------------- //
