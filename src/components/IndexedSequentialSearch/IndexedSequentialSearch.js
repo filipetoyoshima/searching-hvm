@@ -42,7 +42,7 @@ class IndexedSequentialSearch extends React.Component {
             <main>
                 <Game
                     number_of_cells={this.props.number_of_cells}
-                    algorithm="SEQUENTIAL"
+                    algorithm="INDEXEDSEQUENTIAL"
                     search_with_sentinel={this.search_with_sentinel}
                 />
             </main>
